@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 
 app.use(express.json())
-app.get('test',(req,res)=>{
+app.get('/test',(req,res)=>{
   res.json({msg:"hola vercel como estas?"})})
 const PORT = 3000
 
