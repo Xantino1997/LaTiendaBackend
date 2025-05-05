@@ -26,6 +26,11 @@ app.use(express.json());
 app.use("./uploads", express.static(path.join(__dirname, "uploads"))); // para servir imágenes
 
 // Rutas
+
+app.get("/test", (req, res) => {
+  res.send("¡La ruta /test funciona correctamente por fin!");
+});
+
 const mercadoPagoRoutes = require("./router/mercadoPagoRoutes");
 app.use("/api/mercadopago", mercadoPagoRoutes);
 
