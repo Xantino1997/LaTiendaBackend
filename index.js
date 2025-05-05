@@ -6,23 +6,24 @@ const cors = require("cors");
 const path = require("path");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const fs = require("fs");
 
 // Conectar a MongoDB
 connectDB();
-const fs = require("fs");
-app.use("/uploads", express.static("uploads"));
-
-// Crear carpeta uploads si no existe
-const uploadsDir = path.join(\_\_dirname, "uploads");
+const uploadsDir = path.join(__dirname, "uploads");
 if (!fs.existsSync(uploadsDir)) {
-fs.mkdirSync(uploadsDir);
+  fs.mkdirSync(uploadsDir);
 }
 
 // Middlewares
 app.use(cors());
 app.use(express.json());
-app.use("./uploads", express.static(path.join(\_\_dirname, "uploads"))); // para servir imágenes
+app.use("/uploads", express.static("uploads")); // para servir imágenes
+
+// Ruta de prueba
+app.get("/test", (req, res) => {
+  res.send("Hola Vercel");
+});
 
 // Rutas
 const mercadoPagoRoutes = require("./router/mercadoPagoRoutes");
@@ -46,22 +47,20 @@ app.use("/api/compra", compraRoutes);   // Solo compras generales
 app.use("/api/products", require("./router/productRoutes"));
 
 const authRoutes = require("./router/authRoutes");
-
 app.use("/api/auth", authRoutes);
 
 // Para servir archivos estáticos (como imágenes subidas)
-app.use("./uploads", express.static(path.join(\_\_dirname, "uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Ruta de carga de imágenes
 const uploadRoute = require("./router/upload");
 app.use("/api/upload", uploadRoute);
 
+// Agregar app.listen para entorno local
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
-
-
-
 
 
 
