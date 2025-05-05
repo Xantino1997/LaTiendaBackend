@@ -81,16 +81,9 @@ app.get("/", (req, res) => {
 module.exports = app; // necesario si lo usás con Vercel
 
 // Solo escuchá el puerto si estás en entorno local
-if (process.env.NODE_ENV !== "production") {
-  const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
-  });
-}
-
-
-
-
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
 
 
 module.exports = app
