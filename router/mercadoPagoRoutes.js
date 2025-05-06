@@ -18,9 +18,9 @@ router.post("/create_preference", async (req, res) => {
     const preference = {
       items,
       back_urls: {
-        success: "https://la-tienda-87g6c1tm9-xantino1997s-projects.vercel.app/pago",
-        failure: "https://la-tienda-87g6c1tm9-xantino1997s-projects.vercel.app/pago/failure",
-        pending: "https://la-tienda-87g6c1tm9-xantino1997s-projects.vercel.app/pago/pending",
+        success: "https://la-tienda-sooty.vercel.app/pago",
+        failure: "https://la-tienda-sooty.vercel.app/pago/failure",
+        pending: "https://la-tienda-sooty.vercel.app/pago/pending",
       },
       auto_return: "approved",
     };
